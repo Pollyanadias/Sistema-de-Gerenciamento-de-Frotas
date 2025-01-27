@@ -1,4 +1,4 @@
-*** Sistema de Controle de Frotas: Rastreamento de veículos, manutenção preventiva e alocação de motoristas ***
+**Sistema de Controle de Frotas: Rastreamento de veículos, manutenção preventiva e alocação de motoristas**
 
 ***Levantamento de Requisitos***
 
@@ -28,7 +28,7 @@ O sistema deve suportar até 500 usuários simultâneos.
 O sistema deve garantir alta disponibilidade, com tolerância a falhas de até 99,9%.
 
 
-*** Regras de Negócio ***
+***Regras de Negócio***
 
 ***Autenticação de Usuários:***
 
