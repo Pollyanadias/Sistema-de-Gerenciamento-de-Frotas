@@ -35,7 +35,7 @@ rastrear_veiculos <.. identificar_telemetria: <<extend>>
 
 
 motorista --> fazer_login_motorista
-fazer_login_motorista --> alocar_motorista: <<include>>
+fazer_login_motorista ..> alocar_motorista: <<include>>
 alocar_motorista <.. corrigir_motorista: <<extend>>
 
 @enduml
