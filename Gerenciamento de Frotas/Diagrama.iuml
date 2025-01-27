@@ -1,4 +1,4 @@
-@startuml
+@startuml Diagrama
 
 left to right direction
 
@@ -9,7 +9,7 @@ rectangle "Geremciamento de Frotas"{
     (Fazer Login) as fazer_login
     (Rastrear Veiculos) as rastrear_veiculos
     (Gerenciar Manutencao) as gerenciar_manutencao
-    (Visualizar Historico de Localizacao) as vizualizar_historico_de_localizacao
+    (Visualizar Historico de Localizacao) as visualizar_historico_de_localizacao
     (Localizar Veiculo) as localizar_veiculo
     (Saber Velocidade do Veiculo) as saber_velocidade_veiculo
     (Identificar Telemetria) as identificar_telemetria
@@ -20,3 +20,22 @@ rectangle "Geremciamento de Frotas"{
     (Alocar Motorista) as alocar_motorista
     (Corrigir Motorista) as corrigir_motorista
 } 
+
+gestor_de_frotas --> fazer_login
+
+fazer_login ..> rastrear_veiculos: <<include>>
+fazer_login ..> gerenciar_manutencao: <<include>>
+fazer_login ..> visualizar_historico_de_localizacao: <<include>>
+fazer_login ..> alocar_motorista: <<include>>
+visualizar_historico_de_localizacao ..> identificar_tempo_de_veiculo_parado: <<include>>
+visualizar_historico_de_localizacao ..> conhecer_trajeto_pecorrido: <<include>>
+rastrear_veiculos ..> localizar_veiculo: <<include>>
+rastrear_veiculos ..> saber_velocidade_veiculo: <<include>>
+rastrear_veiculos <.. identificar_telemetria: <<extend>>
+
+
+motorista --> fazer_login_motorista
+fazer_login_motorista --> alocar_motorista: <<include>>
+alocar_motorista <.. corrigir_motorista: <<extend>>
+
+@enduml
