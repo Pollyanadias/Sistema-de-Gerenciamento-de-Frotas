@@ -1,0 +1,22 @@
+@startuml
+
+left to right direction
+
+:Gestor de Frotas: as gestor_de_frotas
+:Motorista: as motorista
+
+rectangle "Geremciamento de Frotas"{
+    (Fazer Login) as fazer_login
+    (Rastrear Veiculos) as rastrear_veiculos
+    (Gerenciar Manutencao) as gerenciar_manutencao
+    (Visualizar Historico de Localizacao) as vizualizar_historico_de_localizacao
+    (Localizar Veiculo) as localizar_veiculo
+    (Saber Velocidade do Veiculo) as saber_velocidade_veiculo
+    (Identificar Telemetria) as identificar_telemetria
+    (Identificar Tempo de Veiculo Parado) as identificar_tempo_de_veiculo_parado
+    (Conhecer Trajeto Pecorrido) as conhecer_trajeto_pecorrido
+
+    (Fazer Login Motorista) as fazer_login_motorista
+    (Alocar Motorista) as alocar_motorista
+    (Corrigir Motorista) as corrigir_motorista
+} 
