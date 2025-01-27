@@ -15,6 +15,9 @@ rectangle "Geremciamento de Frotas"{
     (Identificar Telemetria) as identificar_telemetria
     (Identificar Tempo de Veiculo Parado) as identificar_tempo_de_veiculo_parado
     (Conhecer Trajeto Pecorrido) as conhecer_trajeto_pecorrido
+    (Cadastrar Veiculo) as cadastrar_veiculo
+    (Listar Veiculo) as listar_veiculo
+    (Excluir Veiculo) as excluir_veiculo
 
     (Fazer Login Motorista) as fazer_login_motorista
     (Alocar Motorista) as alocar_motorista
@@ -27,6 +30,9 @@ fazer_login ..> rastrear_veiculos: <<include>>
 fazer_login ..> gerenciar_manutencao: <<include>>
 fazer_login ..> visualizar_historico_de_localizacao: <<include>>
 fazer_login ..> alocar_motorista: <<include>>
+fazer_login ..> cadastrar_veiculo: <<include>>
+fazer_login ..> listar_veiculo: <<include>>
+fazer_login ..> excluir_veiculo: <<include>>
 visualizar_historico_de_localizacao ..> identificar_tempo_de_veiculo_parado: <<include>>
 visualizar_historico_de_localizacao ..> conhecer_trajeto_pecorrido: <<include>>
 rastrear_veiculos ..> localizar_veiculo: <<include>>
