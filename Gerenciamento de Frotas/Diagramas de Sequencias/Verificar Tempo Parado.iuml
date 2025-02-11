@@ -1,0 +1,26 @@
+@startuml "Verificar Tempo Parado"
+hide footbox
+
+actor GestorFrota as gestor_ator
+participant TelaTempoParado as tela_tempo_parado
+participant ControleRastreamento as controle_rastreamento
+participant BD as bd
+
+gestor_ator -> tela_tempo_parado: solicitarTempoParado(id_veiculo)
+activate tela_tempo_parado
+
+tela_tempo_parado -> controle_rastreamento: obterTempoParado(id_veiculo)
+activate controle_rastreamento
+
+controle_rastreamento -> bd: consultarHistoricoParadas(id_veiculo)
+activate bd
+
+bd --> controle_rastreamento: retornarHistoricoParadas()
+deactivate bd
+
+controle_rastreamento --> tela_tempo_parado: exibirTempoParado()
+deactivate controle_rastreamento
+
+deactivate tela_tempo_parado
+
+@enduml

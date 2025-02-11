@@ -1,0 +1,25 @@
+@startuml "Cadastrar Veículo"
+hide footbox
+
+actor GestorFrota as gestor_ator
+participant TelaCadastroVeiculo as tela_cadastro_veiculo
+participant ControleVeiculo as controle_veiculo
+participant BD as bd
+
+gestor_ator -> tela_cadastro_veiculo: inserirDadosVeiculo(placa, modelo, ano)
+activate tela_cadastro_veiculo
+
+tela_cadastro_veiculo -> controle_veiculo: validarDados(placa, modelo, ano)
+activate controle_veiculo
+
+controle_veiculo -> bd: salvarVeiculo(placa, modelo, ano)
+activate bd
+
+bd --> controle_veiculo: confirmaçãoCadastro()
+deactivate bd
+
+controle_veiculo --> tela_cadastro_veiculo: exibirMensagem("Cadastro realizado com sucesso")
+deactivate controle_veiculo
+
+deactivate tela_cadastro_veiculo
+@enduml

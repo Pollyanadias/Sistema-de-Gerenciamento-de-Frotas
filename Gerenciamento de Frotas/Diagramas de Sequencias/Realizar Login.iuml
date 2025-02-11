@@ -1,0 +1,38 @@
+@startuml "Realizar Login"
+hide footbox
+
+actor GestorFrota as gestor_ator
+actor Motorista as motorista_ator
+
+participant TelaLogin as tela_login
+participant ControleAcesso as controle_acesso
+participant Sistema as sistema
+participant BD as bd
+
+gestor_ator -> tela_login: inserirCredenciais(usuario, senha)
+activate tela_login
+
+motorista_ator -> tela_login: inserirCredenciais(usuario, senha)
+activate tela_login
+
+tela_login -> controle_acesso: validarCredenciais(usuario, senha)
+activate controle_acesso
+
+controle_acesso -> bd: consultarCredenciais(usuario)
+activate bd
+
+bd --> controle_acesso: credenciaisValidas?
+deactivate bd
+
+alt credenciais válidas
+    controle_acesso -> sistema: autenticarUsuario()
+    sistema -> gestor_ator: acessoPermitido()
+else credenciais inválidas
+    controle_acesso -> tela_login: exibirErro("Usuário ou senha incorretos")
+end
+
+deactivate controle_acesso
+
+deactivate tela_login
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml "Listar Veículos"
+hide footbox
+
+actor GestorFrota as gestor_ator
+participant TelaListaVeiculos as tela_lista_veiculos
+participant ControleVeiculo as controle_veiculo
+participant BD as bd
+
+gestor_ator -> tela_lista_veiculos: solicitarListaVeiculos()
+activate tela_lista_veiculos
+
+tela_lista_veiculos -> controle_veiculo: obterListaVeiculos()
+activate controle_veiculo
+
+controle_veiculo -> bd: consultarVeiculos()
+activate bd
+
+bd --> controle_veiculo: retornarListaVeiculos()
+deactivate bd
+
+controle_veiculo --> tela_lista_veiculos: exibirListaVeiculos()
+deactivate controle_veiculo
+
+deactivate tela_lista_veiculos
+@enduml

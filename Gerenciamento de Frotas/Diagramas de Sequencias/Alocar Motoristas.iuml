@@ -1,0 +1,32 @@
+@startuml "Alocar Motoristas"
+hide footbox
+
+actor GestorFrota as gestor_ator
+participant TelaAlocacao as tela_alocacao
+participant ControleAlocacao as controle_alocacao
+participant BD as bd
+
+gestor_ator -> tela_alocacao: selecionarMotoristaEVeiculo(id_motorista, id_veiculo)
+activate tela_alocacao
+
+tela_alocacao -> controle_alocacao: validarDisponibilidade(id_motorista, id_veiculo)
+activate controle_alocacao
+
+controle_alocacao -> bd: verificarVinculos(id_motorista, id_veiculo)
+activate bd
+
+bd --> controle_alocacao: permitidoAlocar?
+deactivate bd
+
+alt alocação permitida
+controle_alocacao -> bd: registrarAlocacao(id_motorista, id_veiculo)
+bd --> controle_alocacao: sucesso
+controle_alocacao -> tela_alocacao: exibirMensagem("Motorista alocado com sucesso")
+else restrição identificada
+controle_alocacao -> tela_alocacao: exibirErro("Motorista ou veículo indisponível")
+end
+
+deactivate controle_alocacao
+
+deactivate tela_alocacao
+@enduml

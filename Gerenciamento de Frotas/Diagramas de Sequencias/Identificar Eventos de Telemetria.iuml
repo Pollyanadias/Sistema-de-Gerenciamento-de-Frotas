@@ -1,0 +1,26 @@
+@startuml "Identificar Eventos de Telemetria"
+hide footbox
+
+actor GestorFrota as gestor_ator
+participant TelaEventos as tela_eventos
+participant ControleTelemetria as controle_telemetria
+participant BD as bd
+
+gestor_ator -> tela_eventos: solicitarEventosTelemetria(id_veiculo)
+activate tela_eventos
+
+tela_eventos -> controle_telemetria: obterEventos(id_veiculo)
+activate controle_telemetria
+
+controle_telemetria -> bd: consultarEventosTelemetria(id_veiculo)
+activate bd
+
+bd --> controle_telemetria: retornarEventos()
+deactivate bd
+
+controle_telemetria --> tela_eventos: exibirEventos()
+deactivate controle_telemetria
+
+deactivate tela_eventos
+
+@enduml

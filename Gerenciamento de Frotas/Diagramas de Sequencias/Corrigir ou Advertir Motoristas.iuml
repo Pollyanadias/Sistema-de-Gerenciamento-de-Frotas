@@ -1,0 +1,26 @@
+@startuml "Corrigir ou Advertir Motoristas"
+hide footbox
+
+actor GestorFrota as gestor_ator
+participant TelaAdvertencia as tela_advertencia
+participant ControleMotoristas as controle_motoristas
+participant BD as bd
+
+gestor_ator -> tela_advertencia: solicitarAdvertencia(id_motorista, evento)
+activate tela_advertencia
+
+tela_advertencia -> controle_motoristas: registrarAdvertencia(id_motorista, evento)
+activate controle_motoristas
+
+controle_motoristas -> bd: armazenarAdvertencia(id_motorista, evento)
+activate bd
+
+bd --> controle_motoristas: confirmarArmazenamento()
+deactivate bd
+
+controle_motoristas --> tela_advertencia: exibirConfirmacao()
+deactivate controle_motoristas
+
+deactivate tela_advertencia
+
+@enduml
