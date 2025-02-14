@@ -3,45 +3,33 @@
 left to right direction
 
 :Gestor de Frotas: as gestor_de_frotas
-:Motorista: as motorista
 
 rectangle "Geremciamento de Frotas"{
-    (Fazer Login) as fazer_login
     (Rastrear Veiculos) as rastrear_veiculos
     (Gerenciar Manutencao) as gerenciar_manutencao
     (Visualizar Historico de Localizacao) as visualizar_historico_de_localizacao
     (Localizar Veiculo) as localizar_veiculo
-    (Saber Velocidade do Veiculo) as saber_velocidade_veiculo
     (Identificar Telemetria) as identificar_telemetria
     (Identificar Tempo de Veiculo Parado) as identificar_tempo_de_veiculo_parado
     (Conhecer Trajeto Pecorrido) as conhecer_trajeto_pecorrido
     (Cadastrar Veiculo) as cadastrar_veiculo
     (Listar Veiculo) as listar_veiculo
-    (Remover Veiculo) as remover_veiculo
-
-    (Fazer Login Motorista) as fazer_login_motorista
     (Alocar Motorista) as alocar_motorista
     (Corrigir Motorista) as corrigir_motorista
 } 
 
-gestor_de_frotas --> fazer_login
+gestor_de_frotas --> rastrear_veiculos
+gestor_de_frotas --> gerenciar_manutencao
+gestor_de_frotas --> visualizar_historico_de_localizacao
+gestor_de_frotas --> alocar_motorista
+gestor_de_frotas --> cadastrar_veiculo
+gestor_de_frotas --> listar_veiculo
 
-fazer_login ..> rastrear_veiculos: <<include>>
-fazer_login ..> gerenciar_manutencao: <<include>>
-fazer_login ..> visualizar_historico_de_localizacao: <<include>>
-fazer_login ..> alocar_motorista: <<include>>
-fazer_login ..> cadastrar_veiculo: <<include>>
-fazer_login ..> listar_veiculo: <<include>>
-fazer_login ..> remover_veiculo: <<include>>
-visualizar_historico_de_localizacao ..> identificar_tempo_de_veiculo_parado: <<include>>
-visualizar_historico_de_localizacao ..> conhecer_trajeto_pecorrido: <<include>>
+visualizar_historico_de_localizacao <.. identificar_tempo_de_veiculo_parado: <<extend>>
+visualizar_historico_de_localizacao <.. conhecer_trajeto_pecorrido: <<extend>>
 rastrear_veiculos ..> localizar_veiculo: <<include>>
-rastrear_veiculos ..> saber_velocidade_veiculo: <<include>>
-rastrear_veiculos <.. identificar_telemetria: <<extend>>
+localizar_veiculo <.. identificar_telemetria: <<extend>>
 
-
-motorista --> fazer_login_motorista
-fazer_login_motorista ..> alocar_motorista: <<include>>
 alocar_motorista <.. corrigir_motorista: <<extend>>
 
 @enduml
