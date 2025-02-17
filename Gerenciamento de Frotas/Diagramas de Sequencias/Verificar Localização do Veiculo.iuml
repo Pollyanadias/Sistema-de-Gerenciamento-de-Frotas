@@ -6,13 +6,13 @@ participant TelaLocalizacao as tela_localizacao
 participant ControleRastreamento as controle_rastreamento
 participant BD as bd
 
-gestor_ator -> tela_localizacao: solicitarLocalizacao(id_veiculo)
+gestor_ator -> tela_localizacao: solicitarLocalizacao(id_veiculo: int)
 activate tela_localizacao
 
-tela_localizacao -> controle_rastreamento: obterLocalizacao(id_veiculo)
+tela_localizacao -> controle_rastreamento: obterLocalizacao(id_veiculo: int)
 activate controle_rastreamento
 
-controle_rastreamento -> bd: consultarLocalizacao(id_veiculo)
+controle_rastreamento -> bd: consultarLocalizacao(id_veiculo: int)
 activate bd
 
 bd --> controle_rastreamento: retornarCoordenadas()
