@@ -1,0 +1,104 @@
+@startuml "Classe de Projeto"
+hide footbox
+
+class Veiculo {
+    -Placa: String
+    -Modelo: String
+    -Ano: Int
+    -Status: String
+    +rastrear(): String
+    +obterDetalhes(): String
+}
+
+class Gestor {
+    -ID: Int
+    -Nome: String
+    -Email: String
+    -Senha: String
+    +autenticar(email: String, senha: String): Boolean
+    +cadastrarVeiculo(veiculo: Veiculo): Void
+    +removerVeiculo(placa: String): Boolean
+    +alocarMotorista(veiculo: Veiculo, dataInicio: DateTime, dataFim: DateTime): Boolean
+    +gerarRelatorio(tipo: String): RelatorioSistema
+}
+
+class Rastreamento {
+    -ID: Int
+    -Veiculo: Veiculo
+    -Localizacao: String
+    -Horario: DateTime
+    -Velocidade: Float
+    +atualizarLocalizacao(novaLocalizacao: String, novaVelocidade: Float): Void
+    +obterUltimaLocalizacao(): String
+}
+
+class Manutencao {
+    -ID: Int
+    -Veiculo: Veiculo
+    -Data: Date
+    -Descricao: String
+    -Custo: Float
+    +registrarManutencao(veiculo: Veiculo, descricao: String, custo: Float): Void
+    +obterHistorico(veiculo: Veiculo): List<Manutencao>
+}
+
+class Alocacao {
+    -ID: Int
+    -Veiculo: Veiculo
+    -DataInicio: DateTime
+    -DataFim: DateTime
+    +registrarAlocacao(veiculo: Veiculo, dataInicio: DateTime, dataFim: DateTime): Boolean
+    +verificarDisponibilidade(veiculo: Veiculo): Boolean
+    +encerrarAlocacao(): Void
+}
+
+class EventoTelemetria {
+    -ID: Int
+    -Veiculo: Veiculo
+    -TipoEvento: String
+    -DataHora: DateTime
+    +registrarEvento(veiculo: Veiculo, tipoEvento: String, dataHora: DateTime): Void
+    +listarEventos(veiculo: Veiculo): List<EventoTelemetria>
+    +saberVelocidade(): Float
+}
+
+class AdvertenciaMotorista {
+    -ID: Int
+    -Evento: EventoTelemetria
+    -Mensagem: String
+    +emitirAdvertencia(evento: EventoTelemetria, mensagem: String): Void
+    +listarAdvertencias(): List<AdvertenciaMotorista>
+}
+
+class RelatorioSistema {
+    -ID: Int
+    -Tipo: String
+    -DataGeracao: DateTime
+    +gerarRelatorio(tipo: String): String
+    +exportarRelatorio(formato: String): Void
+}
+
+class Frota {
+    -ID: Int
+    -Nome: String
+    -Gestor: Gestor
+    -ListaVeiculos: List<Veiculo>
+    +adicionarVeiculo(veiculo: Veiculo): Void
+    +removerVeiculo(placa: String): Boolean
+    +listarVeiculos(): List<Veiculo>
+}
+
+Gestor "1" -- "*" Veiculo: gerencia >
+Gestor "1" -- "*" Frota: administra >
+Gestor "1" -- "0..*" AdvertenciaMotorista: emite >
+Gestor "1" -- "0..*" Alocacao: cria >
+Frota "1" --o "*" Veiculo: contem >
+Veiculo "1" -- "*" Rastreamento:  é monitorado por >
+Veiculo "1" -- "*" Manutencao: passa por >
+Veiculo "1" -- "*" Alocacao: < atribui
+Veiculo "1" -- "*" EventoTelemetria:  registra >
+EventoTelemetria "1" -- "*" AdvertenciaMotorista: emite >
+Gestor "1" -- "*" RelatorioSistema: gera >
+
+@enduml
+
