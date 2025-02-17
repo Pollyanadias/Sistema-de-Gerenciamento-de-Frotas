@@ -2,25 +2,25 @@
 hide footbox
 
 actor GestorFrota as gestor_ator
-participant TelaAdvertencia as tela_advertencia
-participant ControleMotoristas as controle_motoristas
+participant ControleTelemetria as controle_telemetria
 participant BD as bd
 
-gestor_ator -> tela_advertencia: solicitarAdvertencia(id_motorista, evento)
-activate tela_advertencia
+gestor_ator -> controle_telemetria: obterEventosRecente()
+activate controle_telemetria
 
-tela_advertencia -> controle_motoristas: registrarAdvertencia(id_motorista, evento)
-activate controle_motoristas
-
-controle_motoristas -> bd: armazenarAdvertencia(id_motorista, evento)
+controle_telemetria -> bd: consultarEventos(id_veiculo: int)
 activate bd
 
-bd --> controle_motoristas: confirmarArmazenamento()
+bd --> controle_telemetria: retornarEventos()
 deactivate bd
 
-controle_motoristas --> tela_advertencia: exibirConfirmacao()
-deactivate controle_motoristas
+gestor_ator -> controle_telemetria: emitirAdvertencia(evento: String, mensagem: String)
+controle_telemetria -> bd: salvarAdvertencia(mensagem: String)
+activate bd
 
-deactivate tela_advertencia
+bd --> controle_telemetria: sucesso
 
+deactivate bd
+
+deactivate controle_telemetria
 @enduml
