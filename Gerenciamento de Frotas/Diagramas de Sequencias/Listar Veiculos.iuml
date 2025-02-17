@@ -9,7 +9,7 @@ participant BD as bd
 gestor_ator -> tela_lista_veiculos: solicitarListaVeiculos()
 activate tela_lista_veiculos
 
-tela_lista_veiculos -> controle_veiculo: obterListaVeiculos()
+tela_lista_veiculos -> controle_veiculo: obterListaVeiculos(id_veiculo: id)
 activate controle_veiculo
 
 controle_veiculo -> bd: consultarVeiculos()
