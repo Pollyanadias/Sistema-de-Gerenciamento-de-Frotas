@@ -6,13 +6,13 @@ participant TelaManutencao as tela_manutencao
 participant ControleManutencao as controle_manutencao
 participant BD as bd
 
-gestor_ator -> tela_manutencao: cadastrarManutencao(id_veiculo, tipo, data)
+gestor_ator -> tela_manutencao: cadastrarManutencao(id_veiculo: int, tipo: String, data: Date)
 activate tela_manutencao
 
-tela_manutencao -> controle_manutencao: validarDados(id_veiculo, tipo, data)
+tela_manutencao -> controle_manutencao: validarDados(id_veiculo: int, tipo: String, data: Date)
 activate controle_manutencao
 
-controle_manutencao -> bd: salvarManutencao(id_veiculo, tipo, data)
+controle_manutencao -> bd: salvarManutencao(id_veiculo: int, tipo: String, data: Date)
 activate bd
 
 bd --> controle_manutencao: confirmaçãoCadastro()
