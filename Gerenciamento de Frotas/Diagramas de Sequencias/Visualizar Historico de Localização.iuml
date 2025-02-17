@@ -10,18 +10,18 @@ gestor_ator -> tela_historico: acessarHistoricoLocalizacao()
 activate tela_historico
 
 tela_historico -> gestor_ator: solicitarSelecaoVeiculoEPeriodo()
-gestor_ator -> tela_historico: informarFiltros(id_veiculo: int, periodo: intervalo)
+gestor_ator -> tela_historico: informarFiltros(id_veiculo: int, data: Date)
 
-tela_historico -> controle_rastreamento: obterHistoricoLocalizacao(id_veiculo: int, periodo: intervalo)
+tela_historico -> controle_rastreamento: obterHistoricoLocalizacao(id_veiculo: int, data: Date)
 activate controle_rastreamento
 
-controle_rastreamento -> bd: consultarHistoricoLocalizacao(id_veiculo: int, periodo: intervalo)
+controle_rastreamento -> bd: consultarHistoricoLocalizacao(id_veiculo: int, data: Date)
 activate bd
 
-bd --> controle_rastreamento: retornarHistorico(coordenadas[])
+bd --> controle_rastreamento: retornarHistorico()
 deactivate bd
 
-controle_rastreamento --> tela_historico: exibirHistorico(coordenadas[])
+controle_rastreamento --> tela_historico: exibirHistorico()
 deactivate controle_rastreamento
 
 
