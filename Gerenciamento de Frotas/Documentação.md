@@ -310,4 +310,29 @@ O gestor seleciona um evento e visualiza os detalhes.
 **A1:** se não houver eventos registrados o sistema exibe uma mensagem.
 
 **Pós-condições:** A advertência é registrada no sistema e fica disponível para consulta.
+
 **Critérios de Aceite:** o sistema deve permitir que o gestor emita advertências corretivas de maneira precisa. 
+
+### visualizar historico de localização
+**Objetivo** Permitir que o gestor visualize o historico de localização de um veículo dentro de um periodo especificado
+
+**Atores** Gestor da Frota
+
+**Pré-condições** o veículo deve estar registrado no sistema e possuir rastreamento ativo
+
+**Fluxo Principal**
+O gestor acessa a funcionalidade "Historico de Localização"
+O sistema solicita que o gestor selecione um veículo e defina um período de tempo
+O gestor insere os filtros e confirma a busca
+O sistema recupera e exibe o Histórico de localização do veículo no período selecionado
+O  sistema permite ao gestor visualizar os pontos de localização no mapa ou em formato de relatório
+
+**Fluxos Alternativos**
+
+**A1:** o sistema exibe a mensagem "nenhum dado disponível para este período" caso não tenha dados disponíveis
+
+**Pós-condições**
+O histórico de localização do veículo é apresentado ao gestor conforme os critérios selecionados.
+
+**Críterios de Aceite**
+O sistema deve exibir corretamente o histórico de localização do veículo.
