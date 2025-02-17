@@ -6,13 +6,13 @@ participant TelaTempoParado as tela_tempo_parado
 participant ControleRastreamento as controle_rastreamento
 participant BD as bd
 
-gestor_ator -> tela_tempo_parado: solicitarTempoParado(id_veiculo)
+gestor_ator -> tela_tempo_parado: solicitarTempoParado(id_veiculo: int)
 activate tela_tempo_parado
 
-tela_tempo_parado -> controle_rastreamento: obterTempoParado(id_veiculo)
+tela_tempo_parado -> controle_rastreamento: obterTempoParado(id_veiculo: int)
 activate controle_rastreamento
 
-controle_rastreamento -> bd: consultarHistoricoParadas(id_veiculo)
+controle_rastreamento -> bd: consultarHistoricoParadas(id_veiculo: int)
 activate bd
 
 bd --> controle_rastreamento: retornarHistoricoParadas()
