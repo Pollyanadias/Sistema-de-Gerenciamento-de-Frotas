@@ -1,0 +1,31 @@
+@startuml "Visualizar Histórico de Localização"
+hide footbox
+
+actor GestorFrota as gestor_ator
+participant TelaHistorico as tela_historico
+participant ControleRastreamento as controle_rastreamento
+participant BD as bd
+
+gestor_ator -> tela_historico: acessarHistoricoLocalizacao()
+activate tela_historico
+
+tela_historico -> gestor_ator: solicitarSelecaoVeiculoEPeriodo()
+gestor_ator -> tela_historico: informarFiltros(id_veiculo: int, periodo: intervalo)
+
+tela_historico -> controle_rastreamento: obterHistoricoLocalizacao(id_veiculo: int, periodo: intervalo)
+activate controle_rastreamento
+
+controle_rastreamento -> bd: consultarHistoricoLocalizacao(id_veiculo: int, periodo: intervalo)
+activate bd
+
+bd --> controle_rastreamento: retornarHistorico(coordenadas[])
+deactivate bd
+
+controle_rastreamento --> tela_historico: exibirHistorico(coordenadas[])
+deactivate controle_rastreamento
+
+
+tela_historico -> gestor_ator: permitirVisualizacaoMapaOuRelatorio()
+
+deactivate tela_historico
+@enduml
