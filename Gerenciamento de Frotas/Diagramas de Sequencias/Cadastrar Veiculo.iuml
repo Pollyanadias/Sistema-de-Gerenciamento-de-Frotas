@@ -6,19 +6,19 @@ participant TelaCadastroVeiculo as tela_cadastro_veiculo
 participant ControleVeiculo as controle_veiculo
 participant BD as bd
 
-gestor_ator -> tela_cadastro_veiculo: inserirDadosVeiculo(placa, modelo, ano)
+gestor_ator -> tela_cadastro_veiculo: selecionarOpcaoCadastrarVeiculo()
 activate tela_cadastro_veiculo
 
-tela_cadastro_veiculo -> controle_veiculo: validarDados(placa, modelo, ano)
+tela_cadastro_veiculo -> controle_veiculo: solicitarDadosVeiculo()
 activate controle_veiculo
 
-controle_veiculo -> bd: salvarVeiculo(placa, modelo, ano)
+controle_veiculo -> bd: salvarVeiculo(placa: int, modelo: String, ano: int, tipo: String, dispositivoRastreamento: int)
 activate bd
 
-bd --> controle_veiculo: confirmaçãoCadastro()
-deactivate bd
+bd --> controle_veiculo: sucesso
 
-controle_veiculo --> tela_cadastro_veiculo: exibirMensagem("Cadastro realizado com sucesso")
+deactivate bd
+controle_veiculo -> tela_cadastro_veiculo: exibirMensagem("Veículo cadastrado com sucesso")
 deactivate controle_veiculo
 
 deactivate tela_cadastro_veiculo
