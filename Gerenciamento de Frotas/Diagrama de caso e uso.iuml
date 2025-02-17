@@ -14,14 +14,14 @@ rectangle "Geremciamento de Frotas"{
     (Conhecer Trajeto Pecorrido) as conhecer_trajeto_pecorrido
     (Cadastrar Veiculo) as cadastrar_veiculo
     (Listar Veiculo) as listar_veiculo
-    (Alocar Motorista) as alocar_motorista
+    (Alocar) as alocar
     (Corrigir Motorista) as corrigir_motorista
 } 
 
 gestor_de_frotas --> rastrear_veiculos
 gestor_de_frotas --> gerenciar_manutencao
 gestor_de_frotas --> visualizar_historico_de_localizacao
-gestor_de_frotas --> alocar_motorista
+gestor_de_frotas --> alocar
 gestor_de_frotas --> cadastrar_veiculo
 gestor_de_frotas --> listar_veiculo
 
