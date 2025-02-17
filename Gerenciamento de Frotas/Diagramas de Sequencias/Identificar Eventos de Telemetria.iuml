@@ -6,13 +6,13 @@ participant TelaEventos as tela_eventos
 participant ControleTelemetria as controle_telemetria
 participant BD as bd
 
-gestor_ator -> tela_eventos: solicitarEventosTelemetria(id_veiculo)
+gestor_ator -> tela_eventos: solicitarEventosTelemetria(id_veiculo: int)
 activate tela_eventos
 
-tela_eventos -> controle_telemetria: obterEventos(id_veiculo)
+tela_eventos -> controle_telemetria: obterEventos(id_veiculo: int)
 activate controle_telemetria
 
-controle_telemetria -> bd: consultarEventosTelemetria(id_veiculo)
+controle_telemetria -> bd: consultarEventosTelemetria(id_veiculo: int)
 activate bd
 
 bd --> controle_telemetria: retornarEventos()
