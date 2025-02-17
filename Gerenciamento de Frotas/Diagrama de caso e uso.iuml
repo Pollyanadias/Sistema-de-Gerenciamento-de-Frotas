@@ -30,6 +30,6 @@ visualizar_historico_de_localizacao <.. conhecer_trajeto_pecorrido: <<extend>>
 rastrear_veiculos ..> localizar_veiculo: <<include>>
 localizar_veiculo <.. identificar_telemetria: <<extend>>
 
-alocar_motorista <.. corrigir_motorista: <<extend>>
+alocar <.. corrigir_motorista: <<extend>>
 
 @enduml
