@@ -6,19 +6,19 @@ participant TelaTrajeto as tela_trajeto
 participant ControleRastreamento as controle_rastreamento
 participant BD as bd
 
-gestor_ator -> tela_trajeto: solicitarTrajeto(id_veiculo)
+gestor_ator -> tela_trajeto: selecionarOpcaoTrajeto()
 activate tela_trajeto
 
-tela_trajeto -> controle_rastreamento: obterTrajeto(id_veiculo)
+tela_trajeto -> controle_rastreamento: obterHistoricoTrajeto()
 activate controle_rastreamento
 
-controle_rastreamento -> bd: consultarHistoricoTrajetos(id_veiculo)
+controle_rastreamento -> bd: consultarHistorico(id_veiculo: int, periodo: int)
 activate bd
 
-bd --> controle_rastreamento: retornarHistorico()
+bd --> controle_rastreamento: retornarTrajeto()
 deactivate bd
 
-controle_rastreamento --> tela_trajeto: exibirHistorico()
+controle_rastreamento -> tela_trajeto: exibirMapaTrajeto()
 deactivate controle_rastreamento
 
 deactivate tela_trajeto
