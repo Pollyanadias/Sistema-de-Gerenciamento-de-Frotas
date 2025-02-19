@@ -1,0 +1,86 @@
+@startuml "Classe de Projeto"
+hide footbox
+
+class Veiculo {
+    -Placa: String
+    -Modelo: String
+    -Ano: Int
+    -Status: String
+    +rastrear(): String
+    +obterDetalhes(): String
+}
+
+class Rastreamento {
+    -ID: Int
+    -Veiculo: Veiculo
+    -Localizacao: String
+    -Horario: DateTime
+    -Velocidade: Float
+    +atualizarLocalizacao(novaLocalizacao: String, novaVelocidade: Float): Void
+    +obterUltimaLocalizacao(): String
+}
+
+class Manutencao {
+    -ID: Int
+    -Veiculo: Veiculo
+    -Data: Date
+    -Descricao: String
+    -Custo: Float
+    +registrarManutencao(veiculo: Veiculo, descricao: String, custo: Float): Void
+    +obterHistorico(veiculo: Veiculo): List<Manutencao>
+}
+
+class Alocacao {
+    -ID: Int
+    -Veiculo: Veiculo
+    -Motorista: Motorista
+    -DataInicio: DateTime
+    -DataFim: DateTime
+    +registrarAlocacao(veiculo: Veiculo, motorista: Motorista, dataInicio: DateTime, dataFim: DateTime): Boolean
+    +verificarDisponibilidade(veiculo: Veiculo): Boolean
+    +encerrarAlocacao(): Void
+}
+
+class Motorista {
+    -ID: Int
+    -Nome: String
+    -CNH: String
+    +verificarHabilitacao(): Boolean
+}
+
+class EventoTelemetria {
+    -ID: Int
+    -Veiculo: Veiculo
+    -TipoEvento: String
+    -DataHora: DateTime
+    +registrarEvento(veiculo: Veiculo, tipoEvento: String, dataHora: DateTime): Void
+    +listarEventos(veiculo: Veiculo): List<EventoTelemetria>
+}
+
+class AdvertenciaMotorista {
+    -ID: Int
+    -Motorista: Motorista
+    -Mensagem: String
+    +emitirAdvertencia(motorista: Motorista, mensagem: String): Void
+    +listarAdvertencias(): List<AdvertenciaMotorista>
+}
+
+class Frota {
+    -ID: Int
+    -Nome: String
+    -ListaVeiculos: List<Veiculo>
+    +adicionarVeiculo(veiculo: Veiculo): Void
+    +removerVeiculo(placa: String): Boolean
+    +listarVeiculos(): List<Veiculo>
+}
+
+Frota "1" --o "*" Veiculo: contém >
+Veiculo "1" -- "*" Rastreamento: é monitorado por >
+Veiculo "1" -- "*" Manutencao: passa por >
+Veiculo "1" -- "*" Alocacao: é alocado em >
+Alocacao "1" -- "1" Motorista: responsável >
+Veiculo "1" -- "*" EventoTelemetria: registra >
+EventoTelemetria "1" -- "1" Rastreamento: depende >
+Motorista "1" -- "*" AdvertenciaMotorista: recebe >
+
+@enduml
