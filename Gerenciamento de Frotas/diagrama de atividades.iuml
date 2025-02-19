@@ -1,0 +1,18 @@
+@startuml
+start
+  :Receber localização e velocidade do veículo;
+  if (Velocidade acima do limite?) then (Sim)
+    :Registrar evento de telemetria;
+    :Verificar reincidência do motorista;
+    if (Motorista reincidente?) then (Sim)
+      :Emitir advertência ao motorista;
+    endif
+  endif
+  :Atualizar localização no sistema;
+  :Exibir veículo no mapa em tempo real;
+  if (Veículo parado por muito tempo?) then (Sim)
+    :Gerar alerta de possível incidente;
+  endif
+  :Encerrar ciclo e aguardar nova atualização;
+stop
+@enduml
