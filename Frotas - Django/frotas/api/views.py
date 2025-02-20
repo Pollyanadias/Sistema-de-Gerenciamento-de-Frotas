@@ -1,8 +1,9 @@
-from urllib import response
 from rest_framework.viewsets import ModelViewSet
 from frotas.api.serializers import FrotaSerializer, VeiculoSerializer, MotoristaSerializer, RastreamentoSerializer,ManutencaoSerializer, EventoTelemetriaSerializer, AlocacaoSerializer, AdvertenciaMotoristaSerializer
 from frotas.models import Frota, Veiculo, Motorista, Rastreamento, Manutencao, Alocacao, EventoTelemetria, AdvertenciaMotorista
 from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework import status
 
 class FrotaViewSet(ModelViewSet):
     queryset = Frota.objects.all()
@@ -29,7 +30,7 @@ class RastreamentoViewSet(ModelViewSet):
         try:
             veiculo = Veiculo.objects.get(id=veiculo_id)
         except Veiculo.DoesNotExist:
-            return response({"erro": "Veículo não encontrado"}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"erro": "Veículo não encontrado"}, status=status.HTTP_404_NOT_FOUND)
         
         if velocidade > 80:
             EventoTelemetria.objects.create(veiculo=veiculo, tipo_evento="Velocidade excessiva")
@@ -43,9 +44,9 @@ class RastreamentoViewSet(ModelViewSet):
         if velocidade == 0:
             alertas = Rastreamento.objects.filter(veiculo=veiculo, velocidade=0).count()
             if alertas > 5:
-                return response({"alerta": "Veículo parado por muito tempo!"})
+                return Response({"alerta": "Veículo parado por muito tempo!"})
         
-        return response({"mensagem": "Localização e velocidade processadas com sucesso"})
+        return Response({"mensagem": "Localização e velocidade processadas com sucesso"})
 
 
 class ManutencaoViewSet(ModelViewSet):
