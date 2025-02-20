@@ -1,0 +1,6 @@
+https://github.com/Pollyanadias/Sistema-de-Gerenciamento-de-Frotas.git
+
+O diagrama de classe está no repositório, como "Diagrama de Projeto - atualizado".
+
+Pedro Emanuel Maia de Mesquita
+Pollyana Dias Paiva
